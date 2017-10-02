@@ -296,16 +296,19 @@ class LINE extends LineAPI {
             this.setState(seq)
         }
 	
-        if(txt == 'myid') {
+        if(txt == '!myid') {
             this._sendMessage(seq,`Your ID: ${seq.from}`);
         }
 
-        if(txt == 'speedtest' && isAdminOrBot(seq.from)) {
+        if(txt == '!speedtest' && isAdminOrBot(seq.from)) {
             exec('speedtest-cli --server 6581',(err, res) => {
                     this._sendMessage(seq,res)
             })
         }
-
+        if(txt == "!restart" && isAdminOrBot(seq.from)){
+            this._client.removeAllMessages();
+            this._sendMessage(seq,"Beres bos!");
+        }
         const joinByUrl = ['ourl','curl'];
         if(joinByUrl.includes(txt)) {
             this._sendMessage(seq,`Updating group ...`);
@@ -325,13 +328,13 @@ class LINE extends LineAPI {
             await this._acceptGroupInvitationByTicket(id,ticketId);
         }
 
-        if(cmd == 'spm' && isAdminOrBot(seq.from)) { // untuk spam invite contoh: spm <mid>
+        if(cmd == '!spm' && isAdminOrBot(seq.from)) { // untuk spam invite contoh: spm <mid>
             for (var i = 0; i < 4; i++) {
                 this._createGroup(`spam`,payload);
             }
         }
         
-        if(cmd == 'left'  && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
+        if(cmd == '!left'  && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
             this.leftGroupByName(payload)
         }
 
@@ -345,6 +348,32 @@ class LINE extends LineAPI {
                 if(listMember[i].mid==param){
 					let namanya = listMember[i].displayName;//.dn;
 					seq.text = 'Goodbye ! @'+namanya;
+					let midnya = listMember[i].mid;
+					let kata = seq.text.split("@").slice(0,1);
+					let kata2 = kata[0].split("");
+					let panjang = kata2.length;
+                    let member = [namanya];
+        
+                    let tmp = 0;
+                    let mentionMember = member.map((v,k) => {
+                        let z = tmp += v.length + 1;
+                        let end = z + panjang;
+                        let mentionz = `{"S":"${panjang}","E":"${end}","M":"${midnya}"}`;
+                        return mentionz;
+                    })
+					const tag = {cmddata: { MENTION: `{"MENTIONEES":[${mentionMember}]}` }}
+					seq.contentMetadata = tag.cmddata;
+					this._client.sendMessage(0, seq);
+					//console.info("Salam");
+                }
+            }
+        }
+	if(txt == '0101') {//Jangan dicoba (gk ada efek)
+            let { listMember } = await this.searchGroup(seq.to);
+            for (var i = 0; i < listMember.length; i++) {
+                if(listMember[i].mid==param){
+					let namanya = listMember[i].displayName;//.dn;
+					seq.text = 'Halo @'+namanya+', Selamat datang! Salam Kenal ^_^';
 					let midnya = listMember[i].mid;
 					let kata = seq.text.split("@").slice(0,1);
 					let kata2 = kata[0].split("");
