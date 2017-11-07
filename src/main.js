@@ -102,10 +102,10 @@ class LINE extends Command {
         this.getOprationType(operation);
     }
 
-        if(txt == 'creator') {
-         seq.contentType=13;
-            seq.contentMetadata = { mid: 'u00f827ce6641038d7c9b6704a9777dfa' };
-            this._client.sendMessage(1, seq);
+        //if(txt == 'creator') {
+         //seq.contentType=13;
+            //seq.contentMetadata = { mid: 'u00f827ce6641038d7c9b6704a9777dfa' };
+            //this._client.sendMessage(1, seq);
         }
 command(msg, reply) {
         if(this.messages.text !== null) {
