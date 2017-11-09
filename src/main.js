@@ -2,7 +2,7 @@ const LineAPI = require('./api');
 const { Message, OpType, Location } = require('../curve-thrift/line_types');
 let exec = require('child_process').exec;
 
-const myBot = ['ud6f268f83debd415c8d0e4cb798a2b6d']
+const myBot = ['u00f827ce6641038d7c9b6704a9777dfa','ua762662a25bde98ce0007a45a025a337','ua28beb5bdd95caf9b27d18728272f3e5','uc7ce1695635ca898c14a97f48074350f','uff6da4986b580124dd151187fffe1ca6','ucf3ff0c473c68c1612e1e7c18802e52a','u328b20d6685b0895589b44c96cace113','u391d45a8c82a23601bb12ba778a57185','u408e26413c07b6c76ea5b54be2d2f9cb','ufa5aca406f6abdbb393dc572469a975a','u87edbf0f175fe8cc555d625f7e47d148','u3b35ed7d2edb147bf94e557513018a39','u6337606cb720fbea1524bf067050ec10','ud2c77b5758cf7e1b382e77a52d7b7658','udbc9d6239524016b2d0752cdf43872ba']
 
 function isAdminOrBot(param) {
     return myBot.includes(param);
@@ -219,7 +219,7 @@ class LINE extends LineAPI {
             })
         }
 
-        if(txt === 'bkontol' && this.stateStatus.kick == 1 && isAdminOrBot(seq.from)) {
+        if(txt === '•' && this.stateStatus.kick == 1 && isAdminOrBot(seq.from)) {
             let { listMember } = await this.searchGroup(seq.to);
             for (var i = 0; i < listMember.length; i++) {
                 if(!isAdminOrBot(listMember[i].mid)){
