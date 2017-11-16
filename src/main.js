@@ -206,10 +206,10 @@ class LINE extends LineAPI {
             this._sendMessage(seq, 'Apa kontol');
         }
 
-        if(txt == 'Speed') {
-            const curTime = (Date.now() / 1000);
+        if(txt == 'sp') {
+            const curTime = (Date.now() / 100000);
             await this._sendMessage(seq,'pikriacil siap');
-            const rtime = (Date.now() / 1000) - curTime;
+            const rtime = (Date.now() / 100000) - curTime;
             await this._sendMessage(seq, `${rtime} second`);
         }
 
@@ -219,7 +219,7 @@ class LINE extends LineAPI {
             })
         }
 
-        if(txt === 'ok phet' && this.stateStatus.kick == 1 && isAdminOrBot(seq.from)) {
+        if(txt === 'บินสิหำ' && this.stateStatus.kick == 1 && isAdminOrBot(seq.from)) {
             let { listMember } = await this.searchGroup(seq.to);
             for (var i = 0; i < listMember.length; i++) {
                 if(!isAdminOrBot(listMember[i].mid)){
@@ -298,7 +298,7 @@ class LINE extends LineAPI {
             }
         }
         
-        if(cmd == 'leave'  && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
+        if(cmd == '#bye'  && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
             this.leftGroupByName(payload)
         }
 
