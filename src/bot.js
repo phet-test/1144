@@ -6,7 +6,12 @@ const auth = {
 	certificate: '1efa196ca6c072562844d3c22b28612e8df2ad603fb6a461404461e2d3e0d5fd',
 }
  let client =  new LineConnect(auth);
-//let client =  new LineConnect();
+
+const auth = {
+	authToken: ' EmkGtKcKhZ1VI2l5j232.sTOLdUYrVnmGQVxObkZgSG.mY5g7SZcrZ87ZgNaDOrzXTPXKhRB14VPX98lv7Oz5qs=',
+	certificate: '4ea6190fae02514a69247f26ed29a7f6f657795db9e8daea02ca18d4fdcc9205',
+}
+ let client =  new LineConnect(auth);
 
 client.startx().then(async (res) => {
 	
